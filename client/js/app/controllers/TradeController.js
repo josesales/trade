@@ -8,6 +8,8 @@ class TradeController {
 		this._inputAmount = $("#amount");
 		this._inputValue = $("#value");
 		this._tradeList = new TradeList();
+		this._tradeView = new TradeView($("#tradeView"));
+		this._tradeView.update(this._tradeList);
 	}
 	put(event) {
 
@@ -15,6 +17,8 @@ class TradeController {
 		console.log("Put method called");
 
 		this._tradeList.put(this._makeTrade());
+		this._tradeView.update(this._tradeList);
+		
 		this._cleanForm();
 		console.log(this._tradeList.trades);
 	}

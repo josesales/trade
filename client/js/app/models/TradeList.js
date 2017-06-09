@@ -10,7 +10,7 @@ class TradeList {
     }
 
     get trades() {
-        return this._trades;
+        return [].concat(this._trades);
     }
 
 }

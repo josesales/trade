@@ -10,7 +10,11 @@ class TradeController {
 		this._tradeList = new TradeList();
 		this._tradeView = new TradeView($("#tradeView"));
 		this._tradeView.update(this._tradeList);
+		this._message = new Message();
+		this._messageView = new MessageView($("#messageView"));
+		this._messageView.update(this._message, 'alert alert-success');
 	}
+
 	put(event) {
 
 		event.preventDefault();
@@ -21,9 +25,13 @@ class TradeController {
 		
 		this._cleanForm();
 		console.log(this._tradeList.trades);
+		this._message.text = "Trade added with success!";
+		this._message.type = "alert alert-success";
+		this._messageView.update(this._message);
 	}
 
 	_makeTrade() {
+		
 		return new Trade(DateUtil.textToDate(this._inputDate.value),
 			this._inputAmount.value,
 			this._inputValue.value);

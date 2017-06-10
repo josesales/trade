@@ -12,6 +12,8 @@
 <body class="container">
     <h1 class="text-center">Trades</h1>
 
+    <div id="messageView"></div>
+
     <form class="form" onsubmit="tradeController.put(event)">
 
         <div class="form-group">
@@ -42,15 +44,17 @@
     </div>
     <br>
     <br>
-    <div id="tradeView">
-    
-    </div>
+
+    <div id="tradeView"></div>
 
 <script src="js/app/models/Trade.js"></script>
 <script src="js/app/controllers/TradeController.js"></script>
 <script src="js/app/utils/DateUtil.js"></script>
 <script src="js/app/models/TradeList.js"></script>
+<script src="js/app/views/View.js"></script>
 <script src="js/app/views/TradeView.js"></script>
+<script src="js/app/models/Message.js"></script>
+<script src="js/app/views/MessageView.js"></script>
 	
 <script>
 	let tradeController = new TradeController();

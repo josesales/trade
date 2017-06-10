@@ -6,7 +6,7 @@ class Trade {
         Object.freeze(this);
     }
 
-    getTotalValue() {
+    get totalValue() {
         return this.amount * this.value;
     }
 

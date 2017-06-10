@@ -1,10 +1,10 @@
-class TradeView {
-	
-	constructor(element) {
-		this._element = element;
+class TradeView extends View {
+
+	constructor(tradeList) {
+		super(tradeList);
 	}
-	
-	_template(tradeList) {
+
+	template(tradeList) {
 		return `	
 		<table class="table table-hover table-bordered">
 		    <thead>
@@ -17,19 +17,30 @@ class TradeView {
 		    </thead>
 	
 		    <tbody>
-		    ${tradeList.trades.map(() =>
-		    )}
+		    ${tradeList.trades.map((trade) =>
+
+				`
+					<tr>
+						<td> ${DateUtil.dateTotext(trade.date)} </td>
+						<td> ${trade.amount} </td>
+						<td> ${trade.value} </td>
+						<td> ${trade.totalValue} </td>
+					</tr>
+				`
+
+			).join('')}
 		    </tbody>
 	
-		    <tfoot>
-		    </tfoot>
+	<tfoot>
+		<td colspan="3"></td>
+		<td>${
+			tradeList.trades.reduce((total, trade) => total + trade.totalValue, 0.0)
+			}
+		</td>
+	</tfoot>
 		</table>
-		`;
+	`;
 	}
-	
-	update(tradeList) {
-		this._element.innerHTML = this._template(tradeList);
-	}
-	
+
 }
 

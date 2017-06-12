@@ -1,8 +1,8 @@
 class Message {
 
     constructor(text = '', type = 'alert alert-info') {
-        this._text = text;
         this._type = type;
+        this._text = text;
     }
 
     get text() {
@@ -20,4 +20,5 @@ class Message {
     set type(type) {
         this._type = type;
     }
+
 }

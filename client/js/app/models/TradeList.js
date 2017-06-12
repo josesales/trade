@@ -1,8 +1,8 @@
 //A list of trade in order to keep the trade unchanged. Since a simple array can be easily changed.
 class TradeList {
-    constructor() {
+    constructor(callBack) {
         this._trades = [];
-        // Object.freeze(this);
+        this._callBack = callBack;
     }
 
     put(trade) {
@@ -11,6 +11,10 @@ class TradeList {
 
     get trades() {
         return [].concat(this._trades);
+    }
+
+    clean() {
+        this._trades = [];
     }
 
 }

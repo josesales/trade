@@ -38,7 +38,7 @@
         <button class="btn btn-primary text-center" type="button">
             Import Trades
         </button>
-        <button class="btn btn-primary text-center" type="button">
+        <button onClick="tradeController.clean()" class="btn btn-primary text-center" type="button">
             Clean
         </button>
     </div>
@@ -55,7 +55,8 @@
 <script src="js/app/views/TradeView.js"></script>
 <script src="js/app/models/Message.js"></script>
 <script src="js/app/views/MessageView.js"></script>
-	
+<script src="js/app/services/ProxyFactory.js"></script>
+<script src="js/app/utils/Bind.js"></script>
 <script>
 	let tradeController = new TradeController();
 </script>

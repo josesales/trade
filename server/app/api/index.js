@@ -1,58 +1,58 @@
-/* Código simplório, apenas para fornecer o serviço para a aplicação */
+/* A simple code, just to provide the service for the application*/
 var api = {}
 
-var dataAtual = new Date();
-var dataAnterior = new Date();
-dataAnterior.setDate(dataAtual.getDate() - 7);
-var dateRetrasada = new Date();
-dateRetrasada.setDate(dataAtual.getDate() - 14);
+var currentDate = new Date();
+var oneWeekBefore = new Date();
+oneWeekBefore.setDate(currentDate.getDate() - 7);
+var twoWeeksBefore = new Date();
+twoWeeksBefore.setDate(currentDate.getDate() - 14);
 
-var negociacoes = [
-      { data : dataAtual, quantidade : 1, valor : 150},
-      { data : dataAtual, quantidade : 2, valor : 250},
-      { data : dataAtual, quantidade : 3, valor : 350},
-      { data : dataAnterior, quantidade : 1, valor : 450},
-      { data : dataAnterior, quantidade : 2, valor : 550},
-      { data : dataAnterior, quantidade : 3, valor : 650},
-      { data : dateRetrasada, quantidade : 1, valor : 750},
-      { data : dateRetrasada, quantidade : 2, valor : 950},
-      { data : dateRetrasada, quantidade : 3, valor : 950}
+var trades = [
+      { date : currentDate, amount : 1, value : 150},
+      { date : currentDate, amount : 2, value : 250},
+      { date : currentDate, amount : 3, value : 350},
+      { date : oneWeekBefore, amount : 1, value : 450},
+      { date : oneWeekBefore, amount : 2, value : 550},
+      { date : oneWeekBefore, amount : 3, value : 650},
+      { date : twoWeeksBefore, amount : 1, value : 750},
+      { date : twoWeeksBefore, amount : 2, value : 950},
+      { date : twoWeeksBefore, amount : 3, value : 950}
     ];
 
 
-api.listaSemana = function(req, res) {
-    var negociacoesAtuais = negociacoes.filter(function(negociacao) {
-        return negociacao.data > dataAnterior;
+api.weekList = function(req, res) {
+    var currentTrades = trades.filter(function(trade) {
+        return trade.date > oneWeekBefore;
     });
-    res.json(negociacoesAtuais);
+    res.json(currentTrades);
 };
 
-api.listaAnterior = function(req, res) {
+api.oneWeekBeforeList = function(req, res) {
    
-   var negociacoesAnteriores = negociacoes.filter(function(negociacao) {
-        return negociacao.data < dataAtual && negociacao.data > dateRetrasada;
+   var oneWeekBeforeTrades = trades.filter(function(trade) {
+        return trade.date < currentDate && trade.date > oneWeekBefore;
     });
 	setTimeout(function() {
-		res.json(negociacoesAnteriores);	
+		res.json(oneWeekBeforeTrades);	
 	}, 500);
     
 };
 
-api.listaRetrasada = function(req, res) {
+api.twoWeeksBeforeList = function(req, res) {
 
-   var negociacoesRtrasadas = negociacoes.filter(function(negociacao) {
-        return negociacao.data < dataAnterior;
+   var twoWeeksBeforeTrades = trades.filter(function(trade) {
+        return trade.date < twoWeeksBefore;
     });
-    res.json(negociacoesRtrasadas);
+    res.json(twoWeeksBeforeTrades);
     
 };
 
-api.cadastraNegociacao = function(req, res) {
+api.importTrade = function(req, res) {
 
    console.log(req.body);
-   req.body.data = new Date(req.body.data.replace(/-/g,'/'));
-   negociacoes.push(req.body);
-   res.status(200).json("Negociação recebida");
+   req.body.date = new Date(req.body.date.replace(/-/g,'/'));
+   trades.push(req.body);
+   res.status(200).json("Trade received");
 };
 
 

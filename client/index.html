@@ -35,7 +35,7 @@
     </form>
 
     <div class="text-center">
-        <button class="btn btn-primary text-center" type="button">
+        <button onClick="tradeController.importTrades()" class="btn btn-primary text-center" type="button">
             Import Trades
         </button>
         <button onClick="tradeController.clean()" class="btn btn-primary text-center" type="button">
@@ -57,6 +57,7 @@
 <script src="js/app/views/MessageView.js"></script>
 <script src="js/app/services/ProxyFactory.js"></script>
 <script src="js/app/utils/Bind.js"></script>
+<script src="js/app/services/TradeService.js"></script>
 <script>
 	let tradeController = new TradeController();
 </script>

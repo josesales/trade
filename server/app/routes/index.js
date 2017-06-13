@@ -1,18 +1,18 @@
-/* Código simplório, apenas para fornecer o serviço para a aplicação */
+/* A simple code, just to provide the service for the application*/
 
 var api = require('../api');
 
 module.exports  = function(app) {
     
-    app.route('/negociacoes/semana')
-        .get(api.listaSemana);
+    app.route('/trades/week')
+        .get(api.weekList);
         
-    app.route('/negociacoes/anterior')
-        .get(api.listaAnterior);
+    app.route('/trades/oneWeekBefore')
+        .get(api.oneWeekBeforeList);
         
-    app.route('/negociacoes/retrasada')
-        .get(api.listaRetrasada);  
+    app.route('/trades/twoWeeksBefore')
+        .get(api.twoWeeksBeforeList);  
         
-    app.route('/negociacoes')
-        .post(api.cadastraNegociacao);          
+    app.route('/trades')
+        .post(api.importTrade);          
 };

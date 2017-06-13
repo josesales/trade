@@ -28,6 +28,22 @@ class TradeController {
 		this._message.type = 'alert alert-success';
 	}
 
+	importTrades() {
+		let tradeService = new TradeService();
+		tradeService.getTradesFromWeek((err, trades) => {
+			
+			if(err) {
+				this._message.text = err;
+				this._message.type = 'alert alert-warning';
+				return;
+			}
+
+			trades.forEach(trade => this._tradeList.put(trade));
+			this._message.text = "Trades imported with success!";
+			this._message.type = 'alert alert-success';
+		});
+	}
+
 	_makeTrade() {
 
 		return new Trade(DateUtil.textToDate(this._inputDate.value),

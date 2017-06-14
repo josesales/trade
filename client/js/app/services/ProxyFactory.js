@@ -19,7 +19,9 @@ class ProxyFactory {
             },
 
             set(target, prop, value, receiver) {
-                
+                console.log(`Intercepting: ${target}`);
+                console.log(`Intercepting: ${prop}`);
+                console.log(`Intercepting: ${value}`);
                 if (properties.includes(prop)) {
                     action(target);
                 }

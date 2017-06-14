@@ -5,7 +5,7 @@ class MessageView extends View {
 	}
 
 	template(message) {
-		return message.text ? `<p class="${message.type}">${message.text}</p>` : '';
+		return message.text ? `<p class="alert alert-info">${message.text}</p>` : '';
 	}
 
 }

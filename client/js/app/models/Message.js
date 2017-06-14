@@ -1,8 +1,8 @@
 class Message {
 
     constructor(text = '', type = 'alert alert-info') {
-        this._type = type;
         this._text = text;
+        this._type = type;
     }
 
     get text() {

@@ -12,7 +12,7 @@ class TradeController {
 		this._tradeList = new Bind(new TradeList(), this._tradeView, 'put', 'clean');
 
 		this._messageView = new MessageView($("#messageView"));
-		this._message = new Bind(new Message(), this._messageView, 'text', 'type', 'isVisible');
+		this._message = new Bind(new Message(), this._messageView, 'text', 'type');
 	}
 
 	put(event) {
@@ -29,19 +29,23 @@ class TradeController {
 	}
 
 	importTrades() {
-		let tradeService = new TradeService();
-		tradeService.getTradesFromWeek((err, trades) => {
-			
-			if(err) {
-				this._message.text = err;
-				this._message.type = 'alert alert-warning';
-				return;
-			}
 
-			trades.forEach(trade => this._tradeList.put(trade));
+		let tradeService = new TradeService();
+
+		//Making promisses to avoid callback hell
+		Promise.all([tradeService.getTradesFromWeek(), tradeService.getTradesFromOneWeekBefore(),
+		tradeService.getTradesFromTwoWeeksBefore()]).then(trades => {
+
+			trades.reduce((allTradesArray, tradeArray) => allTradesArray.concat(tradeArray), [])
+				.forEach(trade => this._tradeList.put(trade));
+
 			this._message.text = "Trades imported with success!";
 			this._message.type = 'alert alert-success';
+		}).catch(error => {
+			this._message.text = error;
+			this._message.type = 'alert alert-warning';
 		});
+
 	}
 
 	_makeTrade() {
